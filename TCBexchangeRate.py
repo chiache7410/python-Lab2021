@@ -15,8 +15,7 @@ def web_crawler(url):
 def write_file(filenaem, lines):
     with open(filenaem, 'w', encoding='utf-8') as f:
         f.write('日期' + ',' + '匯率' + '\n')
-        for line in lines:
-            f.write(line + '\n')
+        f.write(lines[0] + ',' + lines[1] + '\n')
 
 def main():
     #lines = ['20210722' + ',' + '30.1' + '\n' + '20210723' + ',' + '29.8' + '\n']
