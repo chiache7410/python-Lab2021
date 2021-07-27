@@ -1,6 +1,7 @@
 import urllib.request as req
 import bs4
 import datetime
+import os
 def web_crawler(url):
     request=req.Request(url, headers={
         "User-Agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.164 Safari/537.36"
@@ -13,18 +14,18 @@ def web_crawler(url):
     exchangerate = root.find_all("td", class_="rt")[2].string
     return([currency, exchangerate])
 
-def write_file(filenaem, lines):
-    filenaem = filenaem + '.csv'
-    with open(filenaem, 'a', encoding='utf-8') as f:
-        #f.write('日期' + ',' + '匯率' + '\n')
+def write_file(filename, lines):
+    filename = filename + '.csv'
+    fflag = os.path.isfile(filename)
+    with open(filename, 'a', encoding='utf-8') as f:
+        if not fflag:
+            f.write('日期' + ',' + '匯率' + '\n')
         f.write(str(datetime.date.today()) + ',' + lines[1] + '\n')
 
 def main():
-    #lines = ['20210722' + ',' + '30.1' + '\n' + '20210723' + ',' + '29.8' + '\n']
-    #web_crawler('https://www.ptt.cc/bbs/movie/index.html')
     #抓取TCB官網上美元的即期買入匯率
     d = web_crawler('https://ibank.tcbbank.com.tw/PIB/cb5/cb501005/CB501005_01.faces')
-    print(d)
+    #print(d)
     write_file(d[0], d)
     print('OK')
 
