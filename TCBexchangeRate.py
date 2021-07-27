@@ -13,8 +13,8 @@ def web_crawler(url):
     return([currency, exchangerate])
 
 def write_file(filenaem, lines):
-    with open(filenaem, 'w', encoding='utf-8') as f:
-        f.write('日期' + ',' + '匯率' + '\n')
+    with open(filenaem, 'a', encoding='utf-8') as f:
+        #f.write('日期' + ',' + '匯率' + '\n')
         f.write(lines[0] + ',' + lines[1] + '\n')
 
 def main():
